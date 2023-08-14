@@ -1,0 +1,65 @@
+openapi: '3.0.2'
+info:
+  title: Onboarding API 
+  version: '1.2'
+  description: STD22059
+servers:
+  - url: https://STD22059.com
+paths:
+  /students:
+    get:
+      description: Now running
+      responses:
+        '200':
+          description: Success
+          content: 
+              application/json: 
+                schema:
+                  $ref: "#/components/schemas/user"
+
+    post:
+      description: Add a new students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                  default: Ravo
+                birthdate:
+                  type: string
+                  default: "2003-01-14"
+
+      responses:
+          '201':
+            description: Studens added
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/user"
+          '400':
+            description: Bad request
+                  
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+          id:
+            type: integer
+            default: 1
+          name:
+            type: string
+            default: Ravo
+          birthdate:
+            type: string
+            default: "2003-01-14"
+
+    
+
