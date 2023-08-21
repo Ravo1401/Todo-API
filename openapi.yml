@@ -1,0 +1,132 @@
+openapi: '3.0.2'
+info:
+  title: Onboarding API
+  version: '1.1'
+  description: STD22059
+servers:
+  - url: https://STD22059.com/v1
+paths:
+  /teacher:
+    get:
+      description: Now running
+      responses:
+        '200':
+          description: Success
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/teachers"
+          
+
+    post:
+      description: Add a new teachers
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  default: 1
+                first-name:
+                  type: string
+                  default: RAMAROZAKA
+                last-name:
+                  type: string
+                  default: Tokimahery
+                course list:
+                  type: string
+                  default: Algorithimique
+                code_course:
+                  type: string
+                  default: PROG1
+                duration:
+                  type: integer
+                  default: 2h
+                
+      responses:
+          '201':
+            description: Teachers added
+            content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/teachers"
+          '400':
+            description: Bad request
+
+    delete:
+      description: Delete a teacher by ID
+      parameters:
+      - name: id
+        in: query
+        description: Teacher ID to be deleted
+        required: true
+        schema:
+          type: integer
+      responses:
+          '204':
+            description: Teacher delete successfuly
+
+    put:
+      description: Update teacher information by ID
+      parameters:
+        - name: id
+          in: query
+          description: Teacher ID to be updated
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  default: RAMAROZAKA
+                last_name:
+                  type: string
+                  default: Tokimahery
+                course_list:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      course:
+                        type: string
+                        default: Algorithme
+                      code_course:
+                        type: string
+                        default: Prog1
+      responses:
+        '200':
+          description: Successful teacher update
+
+
+components:
+  schemas:
+    teachers:
+      type: object
+      properties:
+        id:
+          type: integer
+          default: 1
+        first-name:
+          type: string
+          default: RAMAROZAKA
+        last-name:
+          type: string
+          default: Tokimahery
+        course list:
+          type: string
+          default: Algorithimique
+        code_course:
+          type: string
+          default: PROG1
+        duration:
+          type: integer
+          default: 2h
